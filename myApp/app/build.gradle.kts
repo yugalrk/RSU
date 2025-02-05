@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.myapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.myapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -39,6 +39,13 @@ android {
     buildFeatures {
         compose = true
     }
+
+    // Ensure assets folder is included in the APK
+    sourceSets {
+        getByName("main") {
+            assets.srcDirs("src/main/assets")
+        }
+    }
 }
 
 dependencies {
@@ -58,15 +65,21 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
 
     // CameraX
-    implementation("androidx.camera:camera-core:1.2.3")
-    implementation("androidx.camera:camera-lifecycle:1.2.3")
-    implementation("androidx.camera:camera-camera2:1.2.3")
+    implementation("androidx.camera:camera-core:1.3.0")
+    implementation("androidx.camera:camera-lifecycle:1.3.0")
+    implementation("androidx.camera:camera-camera2:1.3.0")
 
     // Coil for image loading (optional)
     implementation("io.coil-kt:coil-compose:2.4.0")
 
-    // ONNX Runtime
-    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.16.0")
+    // ONNX Runtime - Updated to the latest stable version
+    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.15.1")
+
+    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.16.1")
+
+    // Google Play TensorFlow Lite acceleration service (Optional for better inference)
+    //implementation("com.google.android.gms:play-services-tflite-acceleration-service:16.0.0")
+    implementation("org.jetbrains.kotlinx:kotlin-deeplearning-onnx:0.5.0")
 
     // Testing dependencies
     testImplementation(libs.junit)
